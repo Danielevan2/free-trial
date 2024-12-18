@@ -357,9 +357,8 @@
             headers:[
                 { text: 'Kode Barang', value: 'kodeBarang'},
                 { text: 'Nama', value: 'nama' },
-                { text: 'Kategori', value: 'kategori' },
                 { text: 'Stok', value: 'stok' },
-                { text: 'Harga Ecer', value: 'harga' },
+                { text: 'Harga', value: 'harga' },
                 { text: 'Actions', value: 'actions', sortable: false },],   
 
             // search

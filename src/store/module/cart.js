@@ -28,6 +28,7 @@ const mutations = {
           state.listItem.push(payload)
         }
       }
+
     },
     fillTotal(state,payload){
         state.totalHarga = payload

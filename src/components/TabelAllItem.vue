@@ -63,9 +63,22 @@
                   <td>Rp {{getRp(item.harga) }}</td>
                   <td>{{ item.stok }}</td>
                   <td>
-                    <a @click="tambahItem(item)">
+            
+                    <v-btn
+                        color="green"
+                        class="ma-2 white--text"
+                        @click="tambahItem(item)"
+                        >                
+                        <v-icon
+                            left
+                            dark
+                        >
+                            mdi-plus-thick
+                        </v-icon>
+                    </v-btn>
+                    <!-- <a @click="tambahItem(item)">
                         <v-icon color="green" v-b-popover.hover.top="'Tambah Item'" dense>mdi-cart-plus</v-icon>
-                    </a> 
+                    </a>  -->
                   </td>
                   
                   </tr>
@@ -188,28 +201,7 @@
                   al = Math.abs(angka.replace(/[^,\d]/g, '').toString());
               }
               return al;
-          },         
-          getByKategori(){     
-                this.fillLoading(true)
-                this.fillData([])
-                axios({
-                    url: `https://free-trial-b6eefb5f026f.herokuapp.com/item/kategori?kat=${this.kategoriPilih}&kaca=${this.merkKacaPilih}&mobil=${this.merkMobilPilih}`,
-                    method: 'get',
-                    headers:{
-                        token : localStorage.getItem('token')
-                    }
-                })      
-                        .then(({data})=>{      
-                            this.fillLoading(false)   
-                            this.fillTotal(data.Total)
-                            this.fillData(data.results)
-                        })
-                        .catch(err=>{
-                            this.fillLoading(false)   
-                            console.log('eror')
-                            console.log(err)
-                        })
-            },          
+          },               
           search(page){          
               if(this.src === ''){
                       this.fetchItem(1,10)
@@ -226,7 +218,7 @@
                       token : localStorage.getItem('token')
                   }
                   })      
-                      .then(({data})=>{     
+                      .then(({data})=>{    
                             if(data.results.length === 1){
                                 this.tambahItem(data.results[0])
                             }
@@ -240,7 +232,6 @@
               }         
               },                    
           tambahItem(data){
-            if(Number(data.stok) > 0){
                 this.src = ''
                 let temp = {
                     id: data._id,
@@ -251,7 +242,6 @@
                     harga: data.harga
                 }
                 this.addItem(temp)          
-            }
           },    
         
     },
@@ -294,9 +284,6 @@
           },               
     },
     created(){
-      this.fetchKetegori()
-      this.fetchMerkMobil()
-      this.fetchMerkKaca()
       this.fetchItem(1,10)
     }
   }
